@@ -13,6 +13,7 @@ data_types = ["Decimal -> Binary", "Binary -> Decimal", "Decimal -> Octal",
               "Octal -> Decimal", "Hexadecimal -> Decimal", "Decimal -> Hexadecimal"]
 
 current = 0
+currentoutput = ""
 
 canvas = tk.Canvas(root, width=400, height=600)
 canvas.grid(columnspan=3, rowspan=6)
@@ -32,16 +33,18 @@ Hlbl.grid(column=1, row=4, sticky=N)
 lblFrame = tk.LabelFrame(root, width=300, height=100, bd=4, bg="#c8c8c8")
 lblFrame.grid(column=0, row=4, columnspan=3)
 
-Olbl = tk.Label(root, text="", bg="#c8c8c8")
+Olbl = tk.Label(root, text="", bg="#c8c8c8", wraplength=200)
 Olbl.grid(column=0, row=4, columnspan=3)
 
 
 def execute():
+    global currentoutput
     print("executed")
     inp = inputtxt.get()
-    str = f.choose(current + 1, inp)
-    print(str)
-    Olbl.config(text=str)
+    str1 = f.choose(current + 1, inp)
+    currentoutput = str1
+    print(str1)
+    Olbl.config(text=str1)
 
 
 def scroll_left():
@@ -58,6 +61,11 @@ def scroll_right():
     if current == 6:
         current = 0
     selection_lbl.config(text=data_types[current])
+
+
+def copy(text):
+    root.clipboard_clear()
+    root.clipboard_append(text)
 
 
 # logo
@@ -88,5 +96,9 @@ back_button.grid(column=0, row=1)
 
 forward_button = tk.Button(root, text=">", height=2, width=2, command=lambda: scroll_right())
 forward_button.grid(column=2, row=1)
+
+# Copy Button
+copybutton = tk.Button(root, text="Copy", height=1, width=10, command=lambda: copy(currentoutput))
+copybutton.grid(column=1, row=4, sticky=S)
 
 root.mainloop()

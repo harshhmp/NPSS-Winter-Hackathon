@@ -8,6 +8,6 @@ https://pillow.readthedocs.io/en/stable/installation.html
 
 How to Use the Program:
 1. To run program, run the main.py file and a window should open.  
-2. Use the arrow buttons to select the convertion and then type 
+2. Use the arrow buttons to select the conversion and then type 
 your number below and click submit.     
 3. If you want to copy the output to your clipboard, click the copy button.
